@@ -1,17 +1,27 @@
 import streamlit as st
 
-st.title("Credit Scoring Simple App")
+# Set the title of the app
+st.title("Simple Credit Scoring App")
 
-st.write("سلام! این اولین اپ ساده استریم‌لیت من است.")
+# Description
+st.write("Welcome! This is my first simple Streamlit app.")
 
-income = st.number_input("درآمد ماهانه (تومان):", min_value=0)
-age = st.slider("سن:", 18, 100, 30)
+# User input: monthly income
+income = st.number_input("Monthly Income (Toman):", min_value=0)
 
-if st.button("بررسی اعتبار"):
-    score = (income / 1000000) * 0.3 + (age / 100) * 0.7
-    st.write(f"امتیاز اعتبار شما: {score:.2f}")
+# User input: age
+age = st.slider("Age:", min_value=18, max_value=100, value=30)
 
+# Button to evaluate credit score
+if st.button("Check Credit Score"):
+    # Simple scoring formula (normalized)
+    score = (income / 1_000_000) * 0.3 + (age / 100) * 0.7
+
+    # Display the calculated score
+    st.write(f"Your credit score is: {score:.2f}")
+
+    # Display result based on score
     if score > 0.5:
-        st.success("اعتبار شما خوب است!")
+        st.success("Your credit score is good!")
     else:
-        st.error("اعتبار شما نیاز به بررسی بیشتر دارد.")
+        st.error("Your credit score needs further evaluation.")
